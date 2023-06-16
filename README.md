@@ -12,8 +12,7 @@ A simple 2D palformer game written in C using SDL2. This game is only supported 
 * libsdl2-dev
 * libsdl2-mixer-dev
 * libsld2-image-dev
-* meson
-* ninja-build
+* cmake
 
 ## Manual Install (Ubuntu 22.04.2 LTS)
 ![manual_install_sdl2](./manual_install_sdl2.md)
