@@ -1,7 +1,8 @@
 #include "level.h"
 #include "player/player.h"
 #include "scene/scene.h"
-#include "game_play/game_play.h"
+#include "keybindings/keybindings.h"
+#include "boundaries/boundaries.h"
 
 // #define LEVEL_WIDTH 1000
 const int window_width = 750;
@@ -76,7 +77,32 @@ int main() {
 		printf("Mix_PlayMusic: %s\n", Mix_GetError());
 	}
 
-	GamePlay(rend, player, gamecontroller); // Start movement and physics
+	/* Gameplay Loop */
+	//GamePlay(rend, player, gamecontroller); // Start movement and physics
+	bool quit = false; // gameplay loop switch
+	const int second = 1000; // 1000 ms equals 1s
+	const int gameplay_frames = 60; // amount of frames
+
+	// Pointers
+	struct Player* rplayer = &player;
+
+	#pragma unroll
+	while(!quit) { // gameplay loop
+		/* Keybindings */
+		quit = ClickKeybindings(quit); // Click
+
+		HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
+
+		/* Boundaries */
+		PlayerBoundaries(rplayer); // Set Player Boundaries
+
+		SDL_RenderClear(rend);
+
+		SDL_RenderCopy(rend, player.texture.PlayerTex, &player.texture.srcrect, &player.motion.dstrect);
+		
+		SDL_RenderPresent(rend); // Triggers double buffers for multiple rendering
+        SDL_Delay(second / gameplay_frames); // Calculates to 60 fps
+	}
 	
 	/* Free resources and close SDL and SDL mixer */
 	// Deallocate player and scene surfaces
