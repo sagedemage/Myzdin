@@ -1,21 +1,21 @@
 #include "level.h"
 #include "player/player.h"
 #include "scene/scene.h"
-#include "ground/ground.h"
 #include "game_play/game_play.h"
 
+// #define LEVEL_WIDTH 1000
 const int window_width = 750;
 const int window_height = 500;
+
+
 const int player_view_width = 300;
 const int player_view_height = 200;
 const int ground_height = 25;
 const int ground_width = 1000;
-const int player_width = 51;
-const int player_height = 75;
+const int player_width = 50;
+const int player_height = 50;
 
-const int accely = 1; // max veritical acceleration of the player
-const int spdx = 5; // max horizontal speed of player
-const int spdy = 18; // max vertical speed of player
+const int player_speed = 2; // speed of player
 
 int main() {
 	/* Mixer */
@@ -24,14 +24,16 @@ int main() {
 	const int chunksize = 1024;
 
 	/* Paths to the assets of the game */
-	const char *scene_path = "assets/art/scene.png";
-	const char *player_path = "assets/art/spritesheet.png";
-	const char *ground_path = "assets/art/ground.png";
+	const char *player_path = "assets/art/player.png";
 	const char *music_path = "assets/music/lost.ogg";
 	const char *landing_noise_path = "assets/soundeffects/landing_noise.wav";
 
 	/* Initialize SDL, window, audio, and renderer */
-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER); // Initialize SDL library
+	int sdl_status = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER); // Initialize SDL library
+
+	if (sdl_status == -1) {
+		printf("Mix_OpenAudio: %s\n", SDL_GetError());
+	}
 	
 	SDL_GameController* gamecontroller = SDL_GameControllerOpen(0); // Open Game Controller
 	
@@ -41,54 +43,51 @@ int main() {
 	// Set Fullscreen
 	//SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
 	
-    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, chunksize); // Initialize SDL mixer
+    int open_audio_status = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, chunksize); // Initialize SDL mixer
+
+	if (open_audio_status == -1) {
+		printf("Mix_OpenAudio: %s\n", Mix_GetError());
+	}
 	
 	// Creates a renderer to render the images
 	// * SDL_RENDERER_ACCELERATED starts the program using the GPU hardware
 	SDL_Renderer* rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+	SDL_SetRenderDrawColor(rend, 134, 191, 255, 255);
 
 	/* Loads images, music, and soundeffects */
 	// Creates the asset that loads the image into main memory
-	SDL_Surface* SceneSurf = IMG_Load(scene_path);
 	SDL_Surface* PlayerSurf = IMG_Load(player_path);
-	SDL_Surface* GroundSurf = IMG_Load(ground_path);
 	Mix_Music* music = Mix_LoadMUS(music_path);
 	Mix_Chunk* landing_noise = Mix_LoadWAV(landing_noise_path);
 
 	// Loads image to our graphics hardware memory
-	SDL_Texture* SceneTex = SDL_CreateTextureFromSurface(rend, SceneSurf);
 	SDL_Texture* PlayerTex = SDL_CreateTextureFromSurface(rend, PlayerSurf);
-	SDL_Texture* GroundTex = SDL_CreateTextureFromSurface(rend, GroundSurf);
 
-	struct Limits limits = {accely, spdx, spdy};
-	struct Motion motion = {0, 0, 0, 0, 0, {0, LEVEL_HEIGHT - player_height, player_width, player_height}};
+	struct Motion motion = {player_speed, {0, LEVEL_HEIGHT - player_height, player_width, player_height}};
 	struct Texture texture = {PlayerTex, SDL_FLIP_NONE, {0, 0, player_width, player_height}};
-	struct Player player = {motion, limits, texture};
-	struct Scene scene = {{0, 0, player_view_width, player_view_height}, SceneTex};
-	struct Ground ground = {{0, LEVEL_HEIGHT - ground_height, ground_width, ground_height},
-		{0, 0, player_view_width, ground_height}, GroundTex
-	};
+	struct Player player = {motion, texture};
 
 	Mix_VolumeMusic(music_volume); // Adjust music volume
 	Mix_Volume(1, sound_effect_volume); // set soundeffect volume
-	Mix_PlayMusic(music, -1); // Start background music (-1 means infinity)
 
-	GamePlay(rend, player, scene, ground, gamecontroller, landing_noise); // Start movement and physics
+	int player_music_status = Mix_PlayMusic(music, -1); // Start background music (-1 means infinity)
+
+	if (player_music_status == -1) {
+		printf("Mix_PlayMusic: %s\n", Mix_GetError());
+	}
+
+	GamePlay(rend, player, gamecontroller); // Start movement and physics
 	
 	/* Free resources and close SDL and SDL mixer */
 	// Deallocate player and scene surfaces
 	SDL_FreeSurface(PlayerSurf);
-	SDL_FreeSurface(SceneSurf);
-	SDL_FreeSurface(GroundSurf);
 
 	// Free the music
 	Mix_FreeMusic(music);
 	Mix_FreeChunk(landing_noise);
 
 	// Destroy scene and player textures
-	SDL_DestroyTexture(SceneTex);
     SDL_DestroyTexture(PlayerTex);
-	SDL_DestroyTexture(GroundTex);
 
 	// Destroy renderer
 	SDL_DestroyRenderer(rend);

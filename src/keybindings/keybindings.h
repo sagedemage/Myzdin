@@ -6,7 +6,7 @@ struct ClickKeys {
 	struct Motion motion;
 }__attribute__((aligned(128)));
 
-bool ClickKeybindings(bool quit, struct Player* player);
+bool ClickKeybindings(bool quit);
 void HoldKeybindings(SDL_GameController* gamecontroller, struct Player* player);
 
 #endif //KEYBINDINGS_H
