@@ -12,6 +12,7 @@ const int player_height = 50;
 const int player_speed = 2;		// speed of player
 const int second = 1000;		// 1000 ms equals 1s
 const int gameplay_frames = 60; // amount of frames
+const int player_offset = 50; // gap between left corner of the window
 
 int main()
 {
@@ -62,7 +63,7 @@ int main()
 	// Loads image to our graphics hardware memory
 	SDL_Texture *PlayerTex = SDL_CreateTextureFromSurface(rend, PlayerSurf);
 
-	struct Motion motion = {player_speed, {0, LEVEL_HEIGHT - player_height, player_width, player_height}};
+	struct Motion motion = {player_speed, {0 + player_offset, LEVEL_HEIGHT - player_height - player_offset, player_width, player_height}};
 	struct Texture texture = {PlayerTex, {0, 0, player_width, player_height}};
 	struct Player player = {motion, texture};
 
