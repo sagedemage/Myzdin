@@ -42,7 +42,7 @@ cmake --build .
 Go to `~/.config/Code/User/settings.json`
 Add this line if it does not exist
 ```
-"C_Cpp.clang_format_fallbackStyle": "Google"
+"C_Cpp.clang_format_fallbackStyle": "{ BaseOnStyle: Google, IndentWidth: 4, TabWidth: 4 }"
 ```
 
 ## Assets (Music, Art and Soundeffects)
