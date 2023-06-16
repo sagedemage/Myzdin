@@ -17,14 +17,4 @@ struct Player {
 	struct Texture texture;
 }__attribute__((aligned(128)));
 
-/* Physics */
-
-/* Texture Rendering */
-
-void FaceDirection(struct Player* player);
-
-void SpriteAnimation(struct Player* player);
-
-void RenderPlayer(SDL_Renderer* rend, struct Player player);
-
 #endif // PLAYER_H

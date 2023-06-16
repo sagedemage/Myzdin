@@ -21,9 +21,6 @@ void GamePlay(SDL_Renderer* rend, struct Player player, SDL_GameController* game
 
 		HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
 
-		/* Facing Direction */
-		FaceDirection(rplayer); // player sprite direction
-
 		/* Boundaries */
 		PlayerBoundaries(rplayer); // Set Player Boundaries
 
