@@ -4,19 +4,17 @@
 #include "keybindings/keybindings.h"
 #include "boundaries/boundaries.h"
 
-// #define LEVEL_WIDTH 1000
 const int window_width = 750;
 const int window_height = 500;
-
-
 const int player_view_width = 300;
 const int player_view_height = 200;
 const int ground_height = 25;
 const int ground_width = 1000;
 const int player_width = 50;
 const int player_height = 50;
-
 const int player_speed = 2; // speed of player
+const int second = 1000; // 1000 ms equals 1s
+const int gameplay_frames = 60; // amount of frames
 
 int main() {
 	/* Mixer */
@@ -80,10 +78,8 @@ int main() {
 	/* Gameplay Loop */
 	//GamePlay(rend, player, gamecontroller); // Start movement and physics
 	bool quit = false; // gameplay loop switch
-	const int second = 1000; // 1000 ms equals 1s
-	const int gameplay_frames = 60; // amount of frames
 
-	// Pointers
+	// Player pointers
 	struct Player* rplayer = &player;
 
 	#pragma unroll
