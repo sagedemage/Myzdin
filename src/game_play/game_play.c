@@ -24,9 +24,6 @@ void GamePlay(SDL_Renderer* rend, struct Player player, SDL_GameController* game
 		/* Boundaries */
 		PlayerBoundaries(rplayer); // Set Player Boundaries
 
-		/* Rendering Frames */
-		//RenderPlayer(rend, player); // Render player
-
 		SDL_RenderClear(rend);
 
 		SDL_RenderCopy(rend, player.texture.PlayerTex, &player.texture.srcrect, &player.motion.dstrect);
