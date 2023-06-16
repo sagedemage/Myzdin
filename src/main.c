@@ -2,7 +2,6 @@
 #include "player/player.h"
 #include "scene/scene.h"
 #include "keybindings/keybindings.h"
-#include "boundaries/boundaries.h"
 
 const int window_width = 750;
 const int window_height = 500;
@@ -86,16 +85,16 @@ int main()
 	// Player pointers
 	struct Player *rplayer = &player;
 
-	#pragma unroll
+#pragma unroll
 	while (!quit)
-	{	// gameplay loop
+	{ // gameplay loop
 		/* Keybindings */
 		// quit = ClickKeybindings(quit); // Click
 
 		/* Click Key Bindings */
 		SDL_Event event; // Event handling
-		
-		#pragma unroll
+
+#pragma unroll
 		while (SDL_PollEvent(&event) == 1)
 		{ // Events management
 			switch (event.type)
@@ -122,8 +121,27 @@ int main()
 
 		HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
 
-		/* Boundaries */
-		PlayerBoundaries(rplayer); // Set Player Boundaries
+		/* Player boundaries */
+		// left boundary
+		if (player.motion.dstrect.x < 0)
+		{
+			player.motion.dstrect.x = 0;
+		}
+		// right boundary
+		if (player.motion.dstrect.x + player.motion.dstrect.w > LEVEL_WIDTH)
+		{
+			player.motion.dstrect.x = LEVEL_WIDTH - player.motion.dstrect.w;
+		}
+		// bottom boundary
+		if (player.motion.dstrect.y + player.motion.dstrect.h > LEVEL_HEIGHT)
+		{
+			player.motion.dstrect.y = LEVEL_HEIGHT - player.motion.dstrect.h;
+		}
+		// top boundary
+		if (player.motion.dstrect.y < 0)
+		{
+			player.motion.dstrect.y = 0;
+		}
 
 		SDL_RenderClear(rend);
 
