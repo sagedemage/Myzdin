@@ -64,7 +64,7 @@ int main() {
 	SDL_Texture* PlayerTex = SDL_CreateTextureFromSurface(rend, PlayerSurf);
 
 	struct Motion motion = {player_speed, {0, LEVEL_HEIGHT - player_height, player_width, player_height}};
-	struct Texture texture = {PlayerTex, SDL_FLIP_NONE, {0, 0, player_width, player_height}};
+	struct Texture texture = {PlayerTex, {0, 0, player_width, player_height}};
 	struct Player player = {motion, texture};
 
 	Mix_VolumeMusic(music_volume); // Adjust music volume

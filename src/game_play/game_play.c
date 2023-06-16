@@ -29,7 +29,7 @@ void GamePlay(SDL_Renderer* rend, struct Player player, SDL_GameController* game
 
 		SDL_RenderClear(rend);
 
-		SDL_RenderCopyEx(rend, player.texture.PlayerTex, &player.texture.srcrect, &player.motion.dstrect, 0.0, NULL, player.texture.flip);
+		SDL_RenderCopy(rend, player.texture.PlayerTex, &player.texture.srcrect, &player.motion.dstrect);
 		
 		SDL_RenderPresent(rend); // Triggers double buffers for multiple rendering
         SDL_Delay(second / gameplay_frames); // Calculates to 60 fps

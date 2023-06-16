@@ -8,7 +8,6 @@ struct Motion {
 
 struct Texture {
 	SDL_Texture* PlayerTex; // player texture
-	SDL_RendererFlip flip; // player direction
 	SDL_Rect srcrect; // player source from the player spritesheet
 }__attribute__((aligned(32)));
 
