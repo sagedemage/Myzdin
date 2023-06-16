@@ -9,9 +9,9 @@ set(SOURCE_FILES
     ${HEADER_FILES}
     )
 
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(STANDARD_C_VERSION_FLAG "-std=c17")
+set(STANDARD_C_VERSION_FLAG "-std=c11")
 set(OPTIMIZE_FLAG "-O3")
 set(WARNING_FLAGS "-Werror -Wpedantic -Wall -Wextra -Wno-unknown-pragmas")
 set(LINKER_FLAGS "-lSDL2 -lSDL2_mixer -lSDL2_image")
