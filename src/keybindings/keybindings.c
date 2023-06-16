@@ -2,35 +2,6 @@
 #include "keybindings.h"
 #include <stdio.h>
 
-bool ClickKeybindings(bool quit) {
-    /* Click Key Bindings */
-
-    SDL_Event event; // Event handling
-    //struct ClickKeys click_keys = {quit, motion};
-
-    #pragma unroll
-    while (SDL_PollEvent(&event) == 1) { // Events management
-        switch(event.type) {
-		    case SDL_QUIT: // close button
-                quit = true;
-                break;
-            case SDL_KEYDOWN: // key press
-                if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
-                    quit = true;
-                }
-                break;
-
-            case SDL_CONTROLLERBUTTONDOWN: // controller button press
-                if (event.cbutton.button == SDL_CONTROLLER_BUTTON_START) {
-                    quit = true;
-                }
-            default:
-                break;
-        }
-    }
-    return quit;
-}
-
 void HoldKeybindings(SDL_GameController* gamecontroller, struct Player* player) {
     /* Hold Key bindings */
     // Get the snapshot of the current state of the keyboard
