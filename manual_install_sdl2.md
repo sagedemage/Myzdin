@@ -14,6 +14,13 @@
 - Source code (tar.gz) - [fluidsynth]
 
 ## Compile and Install Dependencies
+
+
+### Install Dependencies for SDL2_mixer
+```
+sudo apt install libpulse-dev libasound2-dev
+```
+
 ### Compile and Install fluidsynth for SDL2_mixer
 ```
 cd fluidsynth-X.X.X
