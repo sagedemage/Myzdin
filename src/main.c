@@ -1,6 +1,5 @@
 #include "level.h"
 #include "player/player.h"
-#include "keybindings/keybindings.h"
 
 const int window_width = 750;
 const int window_height = 500;
@@ -82,9 +81,9 @@ int main()
 	bool quit = false; // gameplay loop switch
 
 	// Player pointers
-	struct Player *rplayer = &player;
+	//struct Player *rplayer = &player;
 
-#pragma unroll
+	#pragma unroll
 	while (!quit)
 	{ // gameplay loop
 		/* Keybindings */
@@ -93,7 +92,7 @@ int main()
 		/* Click Key Bindings */
 		SDL_Event event; // Event handling
 
-#pragma unroll
+		#pragma unroll
 		while (SDL_PollEvent(&event) == 1)
 		{ // Events management
 			switch (event.type)
@@ -118,7 +117,34 @@ int main()
 			}
 		}
 
-		HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
+		//HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
+
+		/* Hold Keybindings */
+		// Get the snapshot of the current state of the keyboard
+		const Uint8 *state = SDL_GetKeyboardState(NULL);
+
+		int left_dpad = SDL_GameControllerGetButton(gamecontroller, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+		int right_dpad = SDL_GameControllerGetButton(gamecontroller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
+		int down_dpad = SDL_GameControllerGetButton(gamecontroller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+		int up_dpad = SDL_GameControllerGetButton(gamecontroller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+
+		if (state[SDL_SCANCODE_LEFT] == 1 || left_dpad == 1)
+		{ // move player left
+			player.motion.dstrect.x -= player.motion.speed;
+		}
+		else if (state[SDL_SCANCODE_RIGHT] == 1 || right_dpad == 1)
+		{ // move player right
+			player.motion.dstrect.x += player.motion.speed;
+		}
+
+		if (state[SDL_SCANCODE_UP] == 1 || up_dpad == 1)
+		{ // move player up
+			player.motion.dstrect.y -= player.motion.speed;
+		}
+		else if (state[SDL_SCANCODE_DOWN] == 1 || down_dpad == 1)
+		{ // move player down
+			player.motion.dstrect.y += player.motion.speed;
+		}
 
 		/* Player boundaries */
 		// left boundary
