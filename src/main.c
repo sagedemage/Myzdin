@@ -12,7 +12,7 @@ const int player_height = 50;
 const int player_speed = 2;		// speed of player
 const int second = 1000;		// 1000 ms equals 1s
 const int gameplay_frames = 60; // amount of frames
-const int player_offset = 50; // gap between left corner of the window
+const int player_offset = 50;	// gap between left corner of the window
 
 int main()
 {
@@ -82,9 +82,9 @@ int main()
 	bool quit = false; // gameplay loop switch
 
 	// Player pointers
-	//struct Player *rplayer = &player;
+	// struct Player *rplayer = &player;
 
-	#pragma unroll
+#pragma unroll
 	while (!quit)
 	{ // gameplay loop
 		/* Keybindings */
@@ -93,7 +93,7 @@ int main()
 		/* Click Key Bindings */
 		SDL_Event event; // Event handling
 
-		#pragma unroll
+#pragma unroll
 		while (SDL_PollEvent(&event) == 1)
 		{ // Events management
 			switch (event.type)
@@ -118,7 +118,7 @@ int main()
 			}
 		}
 
-		//HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
+		// HoldKeybindings(gamecontroller, rplayer); // Hold Keybindings
 
 		/* Hold Keybindings */
 		// Get the snapshot of the current state of the keyboard
