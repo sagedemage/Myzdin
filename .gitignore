@@ -1,0 +1,14 @@
+build
+clang-tooling
+image/Myzdin_progress.png
+assets/art/backup
+*.layout
+*.kra
+*.xcf
+*.cbp
+*.depend
+*.mscz
+*.swp
+*~
+*,
+*.bak
