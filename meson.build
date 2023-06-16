@@ -18,7 +18,7 @@ endif
 build_dir = meson.current_build_dir()
 
 # set source files
-src_files = files('src/main.c', 'src/scene/scene.c', 'src/keybindings/keybindings.c')
+src_files = files('src/main.c', 'src/keybindings/keybindings.c')
 
 # set linker options
 linker_options = ['-lSDL2', '-lSDL2_mixer', '-lSDL2_image']

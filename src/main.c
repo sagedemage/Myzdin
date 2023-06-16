@@ -1,6 +1,5 @@
 #include "level.h"
 #include "player/player.h"
-#include "scene/scene.h"
 #include "keybindings/keybindings.h"
 
 const int window_width = 750;
