@@ -9,4 +9,4 @@
 /* Other libraries */
 #include <stdbool.h>
 
-#endif  // PCH_H
+#endif // PCH_H
