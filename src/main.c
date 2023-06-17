@@ -6,7 +6,7 @@ const int miliseconds = 1000;   // 1000 ms equals 1s
 const int gameplay_frames = 60; // amount of frames per second
 
 int main() {
-	/* Player Attributes */
+    /* Player Attributes */
     const int player_width = 50;
     const int player_height = 50;
     const int player_speed = 2;   // speed of player
