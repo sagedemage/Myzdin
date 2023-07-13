@@ -14,13 +14,11 @@ int main() {
 
     /* Mixer */
     const int music_volume = 12;
-    const int sound_effect_volume = 48;
     const int chunksize = 1024;
 
     /* Paths to the assets of the game */
     const char *player_path = "assets/art/player.png";
     const char *music_path = "assets/music/lost.ogg";
-    const char *landing_noise_path = "assets/soundeffects/landing_noise.wav";
 
     /* Initialize SDL, window, audio, and renderer */
     int sdl_status = SDL_Init(
@@ -37,9 +35,6 @@ int main() {
     SDL_Window *win =
         SDL_CreateWindow("Myzdin", SDL_WINDOWPOS_CENTERED,
                          SDL_WINDOWPOS_CENTERED, LEVEL_WIDTH, LEVEL_HEIGHT, 0);
-
-    // Set Fullscreen
-    // SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
 
     int open_audio_status =
         Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2,
@@ -59,7 +54,6 @@ int main() {
     // Creates the asset that loads the image into main memory
     SDL_Surface *PlayerSurf = IMG_Load(player_path);
     Mix_Music *music = Mix_LoadMUS(music_path);
-    Mix_Chunk *landing_noise = Mix_LoadWAV(landing_noise_path);
 
     // Loads image to our graphics hardware memory
     SDL_Texture *PlayerTex = SDL_CreateTextureFromSurface(rend, PlayerSurf);
@@ -72,7 +66,6 @@ int main() {
     struct Player player = {motion, texture};
 
     Mix_VolumeMusic(music_volume);      // Adjust music volume
-    Mix_Volume(1, sound_effect_volume); // set soundeffect volume
 
     int player_music_status =
         Mix_PlayMusic(music, -1); // Start background music (-1 means infinity)
@@ -178,7 +171,6 @@ int main() {
 
     // Free the music
     Mix_FreeMusic(music);
-    Mix_FreeChunk(landing_noise);
 
     // Destroy scene and player textures
     SDL_DestroyTexture(PlayerTex);
