@@ -7,8 +7,8 @@ const int gameplay_frames = 60; // amount of frames per second
 
 int main() {
     /* Player Attributes */
-    const int player_width = 50;
-    const int player_height = 50;
+    const int player_width = 20;
+    const int player_height = 20;
     const int player_speed = 2;   // speed of player
     const int player_offset = 50; // gap between left corner of the window
 
