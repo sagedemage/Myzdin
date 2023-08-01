@@ -25,7 +25,7 @@ int main() {
         SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER); // Initialize SDL library
 
     if (sdl_status == -1) {
-        printf("Mix_OpenAudio: %s\n", SDL_GetError());
+        printf("SDL_Init: %s\n", SDL_GetError());
     }
 
     SDL_GameController *gamecontroller =
