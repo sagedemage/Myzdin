@@ -1,7 +1,7 @@
-# Myzdin-x86_64
+# Myzdin
 
 ## Gameplay
-![](images/Myzdin_progress.webp)
+![](screenshots/myzdin_window.webp)
 
 ## About
 A simple 2D palformer game written in C using SDL2. This game is only supported for Linux. This game is in alpha software. There are going to be features missing.

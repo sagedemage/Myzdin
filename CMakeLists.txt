@@ -13,7 +13,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(STANDARD_C_VERSION_FLAG "-std=c11")
 set(OPTIMIZE_FLAG "-O3")
-set(WARNING_FLAGS "-Werror -Wpedantic -Wall -Wextra -Wno-unknown-pragmas")
+set(WARNING_FLAGS "-Werror -Wpedantic -Wall -Wextra")
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
