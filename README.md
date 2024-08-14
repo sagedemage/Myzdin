@@ -20,7 +20,7 @@ A simple 2D game written in C using SDL2.
 ## Building the project
 Go the root of my repository
 ```
-cd Myzdin-x86_64
+cd Myzdin
 ```
 
 Set up the build directory
