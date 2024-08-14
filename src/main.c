@@ -78,7 +78,6 @@ int main() {
     // GamePlay(rend, player, gamecontroller); // Start movement and physics
     bool quit = false; // gameplay loop switch
 
-#pragma unroll
     while (!quit) { // gameplay loop
         /* Keybindings */
         // quit = ClickKeybindings(quit); // Click
@@ -86,7 +85,6 @@ int main() {
         /* Click Key Bindings */
         SDL_Event event; // Event handling
 
-#pragma unroll
         while (SDL_PollEvent(&event) == 1) { // Events management
             switch (event.type) {
             case SDL_QUIT: // close button
