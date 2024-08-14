@@ -15,7 +15,7 @@ A simple 2D palformer game written in C using SDL2. This game is only supported 
 * cmake
 
 ## Manual Install (Ubuntu 22.04.2 LTS)
-![manual_install_sdl2](./manual_install_sdl2.md)
+[manual_install_sdl2](./manual_install_sdl2.md)
 
 ## Building the project
 Go the root of my repository
