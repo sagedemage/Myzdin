@@ -28,15 +28,15 @@ int main() {
     const char *player_path = "assets/art/player.png";
     const char *music_path = "assets/music/lost.ogg";
 
-    SDL_Window *win;
-    SDL_Renderer *rend;
+    SDL_Window *win = NULL;
+    SDL_Renderer *rend = NULL;
     bool quit = FALSE;  // gameplay loop switch
 
-    SDL_Surface *PlayerSurf;
-    Mix_Music *music;
-    SDL_Texture *PlayerTex;
+    SDL_Surface *player_surf = NULL;
+    Mix_Music *music = NULL;
+    SDL_Texture *player_tex = NULL;
 
-    const Uint8 *keyboard_state;
+    const Uint8 *keyboard_state = NULL;
 
     Player player;
 
@@ -67,11 +67,11 @@ int main() {
 
     /* Loads images, music, and soundeffects */
     // Creates the asset that loads the image into main memory
-    PlayerSurf = IMG_Load(player_path);
+    player_surf = IMG_Load(player_path);
     music = Mix_LoadMUS(music_path);
 
     // Loads image to our graphics hardware memory
-    PlayerTex = SDL_CreateTextureFromSurface(rend, PlayerSurf);
+    player_tex = SDL_CreateTextureFromSurface(rend, player_surf);
 
     /* Set Player attributes */
     // Motion
@@ -82,7 +82,7 @@ int main() {
     player.dstrect.h = player_height;
 
     // Texture
-    player.texture = PlayerTex;
+    player.texture = player_tex;
     player.srcrect.x = 0;
     player.srcrect.y = 0;
     player.srcrect.w = player_width;
@@ -164,13 +164,13 @@ int main() {
 
     /* Free resources and close SDL and SDL mixer */
     // Deallocate player and scene surfaces
-    SDL_FreeSurface(PlayerSurf);
+    SDL_FreeSurface(player_surf);
 
     // Free the music
     Mix_FreeMusic(music);
 
     // Destroy scene and player textures
-    SDL_DestroyTexture(PlayerTex);
+    SDL_DestroyTexture(player_tex);
 
     // Destroy renderer
     SDL_DestroyRenderer(rend);
