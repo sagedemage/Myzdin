@@ -2,23 +2,23 @@
 #define LEVEL_HEIGHT 500
 
 typedef struct Player {
-    int speed;              // horizontal and vertical velocity
-    SDL_Rect dstrect;       // player destination
-    SDL_Texture *texture;   // player texture
-    SDL_Rect srcrect;       // player source of texture
+    int speed;             // horizontal and vertical velocity
+    SDL_Rect dstrect;      // player destination
+    SDL_Texture *texture;  // player texture
+    SDL_Rect srcrect;      // player source of texture
 } Player;
 
-typedef enum {FALSE, TRUE} bool;
+typedef enum { FALSE, TRUE } bool;
 
 int main() {
     /* Player Attributes */
     const int player_width = 20;
     const int player_height = 20;
-    const int player_speed = 2;   // speed of player
+    const int player_speed = 2;  // speed of player
 
     /* Frames per second */
-    const int miliseconds = 1000;   // 1000 ms equals 1s
-    const int gameplay_frames = 60; // amount of frames per second
+    const int miliseconds = 1000;    // 1000 ms equals 1s
+    const int gameplay_frames = 60;  // amount of frames per second
 
     /* Mixer */
     const int music_volume = 12;
@@ -30,7 +30,7 @@ int main() {
 
     SDL_Window *win;
     SDL_Renderer *rend;
-    bool quit = FALSE; // gameplay loop switch
+    bool quit = FALSE;  // gameplay loop switch
 
     SDL_Surface *PlayerSurf;
     Mix_Music *music;
@@ -48,12 +48,13 @@ int main() {
     }
 
     // Create window
-    win = SDL_CreateWindow("Myzdin", SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED, LEVEL_WIDTH, LEVEL_HEIGHT, 0);
+    win =
+        SDL_CreateWindow("Myzdin", SDL_WINDOWPOS_CENTERED,
+                         SDL_WINDOWPOS_CENTERED, LEVEL_WIDTH, LEVEL_HEIGHT, 0);
 
     // Initialize SDL mixer
     if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT,
-                MIX_DEFAULT_CHANNELS, chunksize) == -1) {
+                      MIX_DEFAULT_CHANNELS, chunksize) == -1) {
         printf("Mix_OpenAudio: %s\n", Mix_GetError());
         return -1;
     }
@@ -97,7 +98,7 @@ int main() {
     }
 
     /* Gameplay Loop */
-    while (quit == FALSE) { // gameplay loop
+    while (quit == FALSE) {  // gameplay loop
         /* Click Key Bindings */
         // Event handling and management
         SDL_Event event;
@@ -155,11 +156,10 @@ int main() {
 
         /* Update the screen with rendering */
         SDL_RenderClear(rend);
-        SDL_RenderCopy(rend, player.texture, &player.srcrect,
-                &player.dstrect);
+        SDL_RenderCopy(rend, player.texture, &player.srcrect, &player.dstrect);
         SDL_RenderPresent(
-                rend); // Triggers double buffers for multiple rendering
-        SDL_Delay(miliseconds / gameplay_frames); // Calculates to 60 fps
+            rend);  // Triggers double buffers for multiple rendering
+        SDL_Delay(miliseconds / gameplay_frames);  // Calculates to 60 fps
     }
 
     /* Free resources and close SDL and SDL mixer */
