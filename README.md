@@ -1,10 +1,10 @@
 # Myzdin
 
 ## Gameplay
-![](screenshots/myzdin_window.webp)
+![myzdin_window](screenshots/myzdin_window.webp)
 
 ## About
-A simple 2D palformer game written in C using SDL2. This game is only supported for Linux. This game is in alpha software. There are going to be features missing.
+A simple 2D game written in C using SDL2.
 
 ## Dependencies
 * gcc (GNU GCC Compiler)
@@ -20,7 +20,7 @@ A simple 2D palformer game written in C using SDL2. This game is only supported 
 ## Building the project
 Go the root of my repository
 ```
-cd Myzdin-x86_64
+cd Myzdin
 ```
 
 Set up the build directory
@@ -36,13 +36,6 @@ cd build
 Compile the project
 ```
 cmake --build .
-```
-
-## Setup Editor for VSCode
-Go to `~/.config/Code/User/settings.json`
-Add this line if it does not exist
-```
-"C_Cpp.clang_format_fallbackStyle": "{ BaseOnStyle: Google, IndentWidth: 4, TabWidth: 4 }"
 ```
 
 ## Assets (Music, Art and Soundeffects)
