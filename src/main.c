@@ -10,7 +10,7 @@ typedef struct Player {
 
 typedef enum { FALSE, TRUE } bool;
 
-int main() {
+int main(void) {
     /* Player Attributes */
     const int player_width = 20;
     const int player_height = 20;
